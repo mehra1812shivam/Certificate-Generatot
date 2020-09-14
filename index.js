@@ -3,6 +3,9 @@ const bodyParser=require("body-parser");
 const app=express();
 const mongoose = require('mongoose');
 const multer=require('multer');
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.json);
+app.use(express.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 mongoose.connect("mongodb://localhost:27017/certificate", {useNewUrlParser: true,useUnifiedTopology:true},()=>{
@@ -119,7 +122,7 @@ app.post('/index',(req,res)=>{
 app.get('/index',(req,res)=>{
     res.json(Certificate);
 });
-app.listen(5000,function(){
+app.listen(3000,function(){
     console.log("server started");
 });
 

@@ -27,6 +27,9 @@ mongoose.connect("mongodb://localhost:27017/certificate", {useNewUrlParser: true
     console.log("database connected");
 });
 var appFormSchema =mongoose.Schema({
+    email:{
+        type:String
+    },
     template_type:{
         type:String,
         required:true
@@ -73,11 +76,13 @@ app.post('/index',(req,res)=>{
 
         else{ 
             var go={
+                email:req.body.to,
                 template_type:req.body.template_type,
                 template_name:req.body.template_name,
                 template_slug:req.body.template_slug,
                 fields:req.body.fields
             }
+            console.log(go);
             console.log(go.fields);
             console.log(go.fields[1].value);
             console.log(go.fields[1].coox);
@@ -100,10 +105,8 @@ app.post('/index',(req,res)=>{
                 for( i=0;i<(go.fields.length)-1;i++){
                     // console.log(i);
                     // console.log(go.fields[1].coox);
-                    let r=go.fields[i+1].coox;
-                    let p=go.fields[i+1].cooy;
-                    let q=go.fields[i+1].value;
-                    image.print(font,p,q,`${r}`);
+        
+                    image.print(font,+go.fields[i+1].coox,+go.fields[i+1].cooy,`${go.fields[i+1].value}`);
         
                 }
                 

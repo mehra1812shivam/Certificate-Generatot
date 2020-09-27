@@ -26,13 +26,14 @@ app.get("/creating/:postId", function(req, res){               //here postId is 
     var cx;
     var cy;
     var value;
-    const image= jimp.read(`./uploads/2020-09-27T12-32-25.390ZCertificate of Completion_ 22 Templates in Word Format - Demplates.jpg`);
-    const font = jimp.loadFont(jimp.FONT_SANS_32_BLACK);
-
+    
     Certi.find({_id: requestedPostId}, function(err, certis){
     //   fname=certis.fields[0].fieldname;
       console.log(JSON.stringify(certis,null));
       console.log(certis[0].fields[0].fieldname);
+      const image= jimp.read("./uploads/2020-09-27T12-32-25.390ZCertificate of Completion_ 22 Templates in Word Format - Demplates.jpg");
+      const font = jimp.loadFont(jimp.FONT_SANS_32_BLACK);
+
       image.print(font,certis[0].fields[0].coox,certis[0].fields[0].cooy,`${certis[0].fields[0].value}`);
       image.write("newcertificate2.png");
       

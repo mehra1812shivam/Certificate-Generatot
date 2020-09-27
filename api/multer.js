@@ -8,11 +8,23 @@ const { read } = require("jimp");
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use(bodyParser.json());
+mongoose.connect("mongodb://localhost:27017/certi", {useNewUrlParser: true,useUnifiedTopology:true},()=>{
+    console.log("database connected");
+});
+//schema for template name
+var appFormSchema =mongoose.Schema({
+    name:{
+        type:String
+    }
+});
+//model for storage template name
+const Certitemp=mongoose.model("Certitemp",appFormSchema);
+
 
 
 const storage=multer.diskStorage({
     destination:function(req,file,cb){
-        cb(null,'./uploads/');
+        cb(null,'../uploads/');
     },
     filename:function(req,file,cb){
         cb(null,new Date().toISOString().replace(/:/g,'-')+file.originalname);
@@ -30,9 +42,19 @@ app.post('/multer',(req,res)=>{
             console.log(err)
             return res.send('Something went wrong')
         }else{
-            let check=req.file.filename;
-            console.log(req.file);
-            res.send("done");
+            var go={
+                name:req.file.filename
+            }
+            var newGo=new Certitemp(go)
+            newGo.save().then(()=>{
+            console.log("Template created");
+            res.send("Done");
+    }).catch((err)=>{
+        if(err){
+            throw err
+        }
+    });
+            
         }
     });    
 });

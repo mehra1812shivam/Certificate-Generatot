@@ -60,6 +60,6 @@ app.post('/multer',(req,res)=>{
 });
 module.exports=upload;
 
-app.listen(5454,function(){
-    console.log("server started");
-});
+// app.listen(5454,function(){
+//     console.log("server started");
+// });

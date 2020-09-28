@@ -73,8 +73,8 @@ app.post('/info',(req,res)=>{
 
 });
 
-// app.listen(5000,function(){
-//     console.log("server started");
-// });
+app.listen(5000,function(){
+    console.log("server started");
+});
 
 module.exports=Certi;

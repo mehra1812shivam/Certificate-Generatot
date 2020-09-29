@@ -21,7 +21,7 @@ var appFormSchema =mongoose.Schema({
 const Certitemp=mongoose.model("Certitemp",appFormSchema);
 
 
-
+//defining properties to be stored
 const storage=multer.diskStorage({
     destination:function(req,file,cb){
         cb(null,'./uploads/');

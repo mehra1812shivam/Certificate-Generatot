@@ -21,10 +21,10 @@ var appFormSchema =mongoose.Schema({
 const Certitemp=mongoose.model("Certitemp",appFormSchema);
 
 
-
+//defining properties to be stored
 const storage=multer.diskStorage({
     destination:function(req,file,cb){
-        cb(null,'../uploads/');
+        cb(null,'./uploads/');
     },
     filename:function(req,file,cb){
         cb(null,new Date().toISOString().replace(/:/g,'-')+file.originalname);
@@ -59,6 +59,7 @@ app.post('/multer',(req,res)=>{
     });    
 });
 module.exports=upload;
+module.exports=Certitemp;
 
 // app.listen(5454,function(){
 //     console.log("server started");

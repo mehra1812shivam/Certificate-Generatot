@@ -39,64 +39,47 @@ router.get("/creating/:postId/:tempId", function(req, res){               //here
         
     });
     
-    //This fetches all the entered fields for the id passed.
-    Certi.find({_id: requestedPostId}, function(err, certis){
-        // console.log(certis[0].fields.length);
     
-    //   console.log(JSON.stringify(certis,null));
-      var i;
-      //loop to print values on certificate
-      
-      for(i=0;i<certis[0].fields.length;i++){
-        // field_name=certis[0].fields[i].fieldname;
-        // x_coor=certis[0].fields[i].coox;
-        // y_coor=certis[0].fields[i].cooy;
-        // field_value=certis[0].fields[i].value;
-
-
-        //printing values on fields
-        Printcertificate(certis[0].fields[i].coox,certis[0].fields[i].cooy,certis[0].fields[i].value); 
-         
-      }
-           
-    
-      
-      
-      
-    });
+    Printcertificate(); 
     //to store template name to be used as global
     function Storetemplatename(){
         var a=`${fetchedData.tempname}`;
         return a;
     }
     // to print the certificate
-    function Printcertificate(x_coor,y_coor,field_value){
+    function Printcertificate(){
         var b=Storetemplatename();
-        (async function(){
-            const image=await jimp.read("../uploads/certifi.png");
-            const font =await jimp.loadFont(jimp.FONT_SANS_32_BLACK);
-            
-            image.print(font,x_coor,y_coor,`${field_value}`);
-            image.write("newcertificate2.png");
-            
+        //This fetches all the entered fields for the id passed.
+        Certi.find({_id: requestedPostId}, function(err, certis){
+        // console.log(certis[0].fields.length);
+    
+    //   console.log(JSON.stringify(certis,null));
+     
+      //loop to print values on certificate
+      (async function(){
+        const image=await jimp.read("../uploads/certifi.png");
+        const font =await jimp.loadFont(jimp.FONT_SANS_32_BLACK);
+        var i=0;
+        for(i=0;i<certis[0].fields.length;i++){
+            image.print(font,certis[0].fields[i].coox,certis[0].fields[i].cooy,`${certis[0].fields[i].value}`);
 
-            
-            
-        })().catch((err)=>{
-            if(err){
-                throw err
-            }
-        });
-       
-  
+        }
         
         
+        image.write("newcertificate2.png");
+        
 
+        
+        
+    })().catch((err)=>{
+        if(err){
+            throw err
+        }
+    });
+
+      
+    });
     }
-
-    
-    
-
     
   
   });

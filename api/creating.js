@@ -1,6 +1,6 @@
 const express=require("express");
 const bodyParser=require("body-parser");
-const app=express();
+const router=express.Router()
 const Certitemp=require('./multer');
 const Certi=require('./info');
 const upload=require('./multer');
@@ -8,7 +8,6 @@ const mongoose = require('mongoose');
 const multer=require('multer');
 const jimp=require('jimp');
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static('public'))
 app.use(bodyParser.json());
 //connecting to database
 mongoose.connect("mongodb://localhost:27017/certi", {useNewUrlParser: true,useUnifiedTopology:true},()=>{
@@ -26,7 +25,7 @@ var x_coor=0;
 var y_coor=0;
 var field_value="";
 
-app.get("/creating/:postId/:tempId", function(req, res){               //here postId is the name of parameter
+router.get("/creating/:postId/:tempId", function(req, res){               //here postId is the name of parameter
     const requestedPostId = req.params.postId;  //takes id passed in parameter
     const requestedtempId = req.params.tempId;
     
@@ -103,6 +102,4 @@ app.get("/creating/:postId/:tempId", function(req, res){               //here po
   });
 
   
-app.listen(2000,function(){
-    console.log("server started");
-});
+  module.exports=router

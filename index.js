@@ -14,6 +14,7 @@ const upload = require("./api/multer");
 // const mul=require('./api/multer');
 app.use(upload);
 app.use(info);
+app.use(multer)
 
 app.listen(2000,function(){
     console.log("server started");

@@ -1,18 +1,21 @@
 const express=require("express");
 const bodyParser=require("body-parser");
 const router=express.Router()
-const Certitemp=require('./multer');
-const Certi=require('./info');
-const upload=require('./multer');
+const mi=require('./multer');
+const inf=require('./info');
 const mongoose = require('mongoose');
+const Certitemp=mongoose.model('Certitemp');
+const Certi=mongoose.model('Certi');
+const upload=require('./multer');
+
 const multer=require('multer');
 const jimp=require('jimp');
 // app.use(bodyParser.urlencoded({ extended: true }))
 // app.use(bodyParser.json());
 //connecting to database
-mongoose.connect("mongodb://localhost:27017/certi", {useNewUrlParser: true,useUnifiedTopology:true},()=>{
-    console.log("database connected");
-});
+// mongoose.connect("mongodb://localhost:27017/certi", {useNewUrlParser: true,useUnifiedTopology:true},()=>{
+//     console.log("database connected");
+// });
 
 // Certi.find({"fields.fieldname":"Role"},function(err,certis){
 //     console.log(JSON.stringify(certis,null));

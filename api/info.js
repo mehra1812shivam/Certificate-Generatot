@@ -10,13 +10,6 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const router = express.Router();
 
-mongoose.connect(
-  "mongodb://localhost:27017/certi",
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  () => {
-    console.log("database connected");
-  }
-);
 var appFormSchema = mongoose.Schema(
   {
     email: {

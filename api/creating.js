@@ -31,20 +31,19 @@ router.get("/creating/:postId/:tempId", function(req, res){               //here
     
     
     //This finds the template name with id passed in the url
-    Certitemp.find({_id:requestedtempId},function(err,certitemps){
-        // console.log(JSON.stringify(certitemps,null));
-        // console.log(certitemps[0].name);
-        fetchedData.tempname=`${certitemps[0].name}`;
-        Storetemplatename();
-        
-    });
+    
     
     
     Printcertificate(); 
     //to store template name to be used as global
     function Storetemplatename(){
-        var a=`${fetchedData.tempname}`;
-        return a;
+        Certitemp.find({_id:requestedtempId},function(err,certitemps){
+            // console.log(JSON.stringify(certitemps,null));
+            // console.log(certitemps[0].name);
+             return certitemps[0].name;
+            
+        });
+        
     }
     // to print the certificate
     function Printcertificate(){
@@ -57,7 +56,7 @@ router.get("/creating/:postId/:tempId", function(req, res){               //here
      
       //loop to print values on certificate
       (async function(){
-        const image=await jimp.read("../uploads/certifi.png");
+        const image=await jimp.read(`./uploads/${Storetemplatename()}`);
         const font =await jimp.loadFont(jimp.FONT_SANS_32_BLACK);
         var i=0;
         for(i=0;i<certis[0].fields.length;i++){

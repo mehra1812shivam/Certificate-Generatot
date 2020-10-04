@@ -15,7 +15,14 @@
 
 const express=require("express");
 const app=express();
-
+const mongoose=require('mongoose');
+mongoose.connect(
+    "mongodb://localhost:27017/certi",
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    () => {
+      console.log("database connected");
+    }
+  );
 const multerroute=require('./api/multer')
 const info=require('./api/info')
 const create=require('./api/creating')

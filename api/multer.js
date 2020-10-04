@@ -28,7 +28,7 @@ const Certitemp = mongoose.model("Certitemp", appFormSchema);
 // //defining properties to be stored
 const storage = multer.diskStorage({
   destination: (req, file, callBack) => {
-    callBack(null, "./uploads");
+    callBack(null, "./uploads/");
   },
   //   filename: (req, file, callBack) => {
   //     callBack(null, `${file.originalname}`);
@@ -66,7 +66,7 @@ router.post("/multer", (req, res) => {
   });
 });
 module.exports=upload;
-module.exports=Certitemp;
+// module.exports=Certitemp;
 
 // module.exports=router
 // app.listen(5000, function () {

@@ -7,8 +7,8 @@ const upload=require('./multer');
 const mongoose = require('mongoose');
 const multer=require('multer');
 const jimp=require('jimp');
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(bodyParser.json());
 //connecting to database
 mongoose.connect("mongodb://localhost:27017/certi", {useNewUrlParser: true,useUnifiedTopology:true},()=>{
     console.log("database connected");
